@@ -6,10 +6,15 @@ import GameContext from "../../utils/game-context";
 
 export default function GameBoard() {
     const { board } = useContext(GameContext);
+    console.log(board);
     return (
         <section className={styles["game-board"]} data-testid="game-board">
-            {board.map(({ id, value }) => {
-                return <GameKey key={id}>{value}</GameKey>;
+            {board.map((row, id) => {
+                { console.log(row); }
+                return row.map(({ id, value }) => {
+                    return <GameKey key={id}>{value}</GameKey>;
+                })
+
             })}
 
         </section>

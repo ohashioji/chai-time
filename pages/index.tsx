@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import { useState } from "react";
-import GameContext, { GameContextType } from "../utils/game-context";
+import GameContext, { buildBoard, GameContextType } from "../utils/game-context";
 import GameBoard from "../components/GameBoard/GameBoard";
 import KeyBoard from "../components/KeyBoard/KeyBoard";
 import MainWrapper from "../components/MainWrapper/MainWrapper";
@@ -13,17 +13,15 @@ interface IndexPageProps {
 
 const Home = ({ data }: IndexPageProps) => {
   const [target, setTarget] = useState(0);
-  const [board, setBoard] = useState(new Array(30).fill(null).map((_, id) => ({
-    id: id,
-    value: ""
-  })));
+  const [board, setBoard] = useState(buildBoard());
   const initialContext: GameContextType = {
+    attempt: 0,
     target,
     setTarget,
     board,
     setBoard
   };
-  console.log(data)
+
   return (
     <MainWrapper>
       <GameContext.Provider value={initialContext}>

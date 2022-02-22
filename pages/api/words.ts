@@ -10,8 +10,10 @@ export default function handler(
 	req: NextApiRequest,
 	res: NextApiResponse<Word>
 ) {
-	const todaysPick = {
-		word: words[Math.floor(Math.random() * words.length)],
-	};
-	res.status(200).json(todaysPick);
+	if (req.method === "GET") {
+		const todaysPick = {
+			word: words[Math.floor(Math.random() * words.length)],
+		};
+		res.status(200).json(todaysPick);
+	}
 }
