@@ -1,0 +1,13 @@
+.game-key {
+	width: 3.75rem;
+	height: 3.75rem;
+	border: 1px solid black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition-duration: 0.2s;
+	cursor: pointer;
+	&:active {
+		transform: scale(0.95);
+	}
+}
