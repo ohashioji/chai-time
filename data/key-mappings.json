@@ -102,5 +102,13 @@
     {
         "key": "z",
         "type": "input"
+    },
+    {
+        "key": "submit",
+        "type": "submit"
+    },
+    {
+        "key": "back",
+        "type": "mod"
     }
 ]
