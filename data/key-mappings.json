@@ -1,22 +1,54 @@
 [
     {
-        "key": "a",
+        "key": "q",
         "type": "input"
     },
     {
-        "key": "b",
-        "type": "input"
-    },
-    {
-        "key": "c",
-        "type": "input"
-    },
-    {
-        "key": "d",
+        "key": "w",
         "type": "input"
     },
     {
         "key": "e",
+        "type": "input"
+    },
+    {
+        "key": "r",
+        "type": "input"
+    },
+    {
+        "key": "t",
+        "type": "input"
+    },
+    {
+        "key": "y",
+        "type": "input"
+    },
+    {
+        "key": "u",
+        "type": "input"
+    },
+    {
+        "key": "i",
+        "type": "input"
+    },
+    {
+        "key": "o",
+        "type": "input"
+    },
+    {
+        "key": "p",
+        "type": "input"
+    },
+    {
+        "key": "a",
+        "type": "input"
+    },
+    {
+        "key": "s",
+        "type": "input"
+    },
+    {
+        "key": "d",
         "type": "input"
     },
     {
@@ -32,10 +64,6 @@
         "type": "input"
     },
     {
-        "key": "i",
-        "type": "input"
-    },
-    {
         "key": "j",
         "type": "input"
     },
@@ -48,47 +76,7 @@
         "type": "input"
     },
     {
-        "key": "m",
-        "type": "input"
-    },
-    {
-        "key": "n",
-        "type": "input"
-    },
-    {
-        "key": "o",
-        "type": "input"
-    },
-    {
-        "key": "p",
-        "type": "input"
-    },
-    {
-        "key": "q",
-        "type": "input"
-    },
-    {
-        "key": "r",
-        "type": "input"
-    },
-    {
-        "key": "s",
-        "type": "input"
-    },
-    {
-        "key": "t",
-        "type": "input"
-    },
-    {
-        "key": "u",
-        "type": "input"
-    },
-    {
-        "key": "v",
-        "type": "input"
-    },
-    {
-        "key": "w",
+        "key": "z",
         "type": "input"
     },
     {
@@ -96,11 +84,23 @@
         "type": "input"
     },
     {
-        "key": "y",
+        "key": "c",
         "type": "input"
     },
     {
-        "key": "z",
+        "key": "v",
+        "type": "input"
+    },
+    {
+        "key": "b",
+        "type": "input"
+    },
+    {
+        "key": "n",
+        "type": "input"
+    },
+    {
+        "key": "m",
         "type": "input"
     }
 ]

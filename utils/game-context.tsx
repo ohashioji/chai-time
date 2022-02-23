@@ -1,9 +1,9 @@
-import build from "next/dist/build";
 import React from "react";
+import { buildBoard } from "./helpers/misc";
 
-type GameBoardType = AnswerAttemptType[];
+export type GameBoardType = AnswerAttemptType[];
 
-type AnswerAttemptType = {
+export type AnswerAttemptType = {
     id: number;
     value: string;
     correct: boolean;
@@ -20,24 +20,7 @@ export type GameContextType = {
 };
 
 
-export function buildBoard() {
-    const boardArr: GameBoardType[] = [];
-    let tempArr: AnswerAttemptType[] = [];
-    new Array(30).fill(null).forEach((_, id) => {
-        tempArr.push({
-            id: id,
-            value: "",
-            correct: false,
-            wrongIndex: false
-        });
 
-        if ((id + 1) % 5 === 0) {
-            boardArr.push(tempArr);
-            tempArr = [];
-        }
-    });
-    return boardArr;
-}
 
 const defaultGameContext = {
     attempt: 0,

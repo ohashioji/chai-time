@@ -3,13 +3,16 @@ import styles from "./KeyBoard.module.scss";
 import keyMappings from "../../data/key-mappings.json";
 import Key from "../Key/Key";
 import GameContext from "../../utils/game-context";
-
+import useBoardValidation from "../../utils/hooks/use-board-validation";
+import useHandleBack from "../../utils/hooks/use-handle-back";
 interface KeyBoardProps {
     word: string;
 }
 
 export default function KeyBoard({ word }: KeyBoardProps) {
-    const { board, target, setTarget, attempt, setAttempt, setBoard } = useContext(GameContext);
+    const { board, attempt, setBoard } = useContext(GameContext);
+    const validateBoard = useBoardValidation();
+    const handleBack = useHandleBack();
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const submission = board[attempt].map(({ value }) => value).join('');
@@ -27,49 +30,14 @@ export default function KeyBoard({ word }: KeyBoardProps) {
                     word: submission
                 })
             });
-
             const { valid } = await res.json();
             if (valid) {
-                const charArr = word.split("").map((char, index) => ({ index, char }));
-                const correctCharAndIndex = charArr
-                    .filter(({ char, index }) => char === board[attempt][index].value);
-                const otherChars = board[attempt].filter(({ id }) => correctCharAndIndex.every(({ index }) => id !== index));
-                correctCharAndIndex
-                    .forEach(({ index }) => {
-                        board[attempt][index].correct = true;
-                    });
-
-                otherChars.forEach(({ value, ...elem }) => {
-                    if (word.includes(value)) {
-                        elem.wrongIndex = true;
-                    }
-
-                });
-
-                setBoard(board.slice());
-                setAttempt(oldAttempt => oldAttempt + 1);
+                validateBoard(word);
             }
         }
-
     };
 
-    function handleBack(e: React.SyntheticEvent<HTMLButtonElement>) {
-        e.preventDefault();
-        if (target > 0) {
-            const newTarget = (oldTarget: number) => oldTarget - 1 >= 0 ? oldTarget - 1 : 0;
-            const resetGuess = {
-                id: newTarget(target),
-                value: "",
-                correct: false,
-                wrongIndex: false
 
-            };
-            board[attempt].splice(target - 1, 1, resetGuess);
-            const newBoard = board.slice();
-            setBoard(newBoard);
-            setTarget(newTarget);
-        }
-    }
 
     return (
         <form className={styles["key-board"]} data-testid="key-board" onSubmit={handleSubmit}>
