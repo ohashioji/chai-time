@@ -14,7 +14,8 @@ export default function useHandleBack() {
                 wrongIndex: false
 
             };
-            board[attempt].splice(target - 1, 1, resetGuess);
+            board[attempt].splice(newTarget(target) % 5, 1, resetGuess);
+            console.log(board);
             const newBoard = board.slice();
             setBoard(newBoard);
             setTarget(newTarget);
