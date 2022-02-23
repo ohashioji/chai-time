@@ -14,4 +14,14 @@
 	&:active {
 		transform: scale(0.9);
 	}
+	&--disabled {
+		background-color: rgb(0, 0, 0);
+		border: 1px solid black;
+		color: white;
+		opacity: 0.8;
+		cursor: not-allowed;
+		&:active {
+			transform: none;
+		}
+	}
 }

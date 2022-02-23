@@ -17,10 +17,9 @@ export type GameContextType = {
     setTarget: React.Dispatch<React.SetStateAction<number>>;
     board: GameBoardType[];
     setBoard: React.Dispatch<React.SetStateAction<GameBoardType[]>>;
+    disabledKeys: string[];
+    setDisabledKeys: React.Dispatch<React.SetStateAction<string[]>>;
 };
-
-
-
 
 const defaultGameContext = {
     attempt: 0,
@@ -28,7 +27,9 @@ const defaultGameContext = {
     target: 0,
     setTarget: () => { },
     board: buildBoard(),
-    setBoard: () => { }
+    setBoard: () => { },
+    disabledKeys: [],
+    setDisabledKeys: () => { }
 } as GameContextType;
 
 const GameContext = React.createContext(defaultGameContext);

@@ -2309,4 +2309,4 @@ const words = [
 	"rural",
 	"shave",
 ];
-export default words
+export default words;

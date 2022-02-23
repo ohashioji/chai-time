@@ -15,13 +15,16 @@ const Home = ({ data }: IndexPageProps) => {
   const [target, setTarget] = useState(0);
   const [board, setBoard] = useState(buildBoard());
   const [attempt, setAttempt] = useState(0);
+  const [disabledKeys, setDisabledKeys] = useState<string[]>([]);
   const initialContext: GameContextType = {
     attempt,
     setAttempt,
     target,
     setTarget,
     board,
-    setBoard
+    setBoard,
+    disabledKeys,
+    setDisabledKeys
   };
   return (
     <>
