@@ -5,6 +5,9 @@ import KeyBoard from "../components/KeyBoard/KeyBoard";
 import Nav from "../components/Nav/Nav";
 import MainWrapper from "../components/MainWrapper/MainWrapper";
 import { buildBoard } from "../utils/helpers/misc";
+import Portal from "../components/Portal/Portal";
+import Modal from "../components/Modal/Modal";
+import ModalContext, { ModalContextType } from "../utils/modal-context";
 export interface IndexPageProps {
   data: {
     word: string;
@@ -26,15 +29,32 @@ const Home = ({ data }: IndexPageProps) => {
     disabledKeys,
     setDisabledKeys
   };
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+  const initialModal: ModalContextType = {
+    message: modalMessage,
+    setMessage: setModalMessage,
+  };
+
+
   return (
     <>
       <Nav />
-      <MainWrapper>
-        <GameContext.Provider value={initialContext}>
-          <GameBoard />
-          <KeyBoard word={data.word} />
-        </GameContext.Provider>
-      </MainWrapper>
+      <ModalContext.Provider value={initialModal}>
+        <div id="modal" className="portal" />
+        {modalIsOpen && (
+          <Portal selector="#modal">
+            <Modal />
+          </Portal>
+        )}
+        <MainWrapper>
+          <GameContext.Provider value={initialContext}>
+            <GameBoard />
+            <KeyBoard word={data.word} setModalIsOpen={setModalIsOpen} />
+          </GameContext.Provider>
+        </MainWrapper>
+      </ModalContext.Provider>
+
     </>
   );
 };
@@ -50,4 +70,4 @@ export async function getServerSideProps() {
       data
     }, // will be passed to the page component as props
   };
-}
+};

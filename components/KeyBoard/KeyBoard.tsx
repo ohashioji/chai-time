@@ -1,18 +1,23 @@
-import React, { useContext } from 'react';
+import React, { SetStateAction, useContext } from 'react';
 import styles from "./KeyBoard.module.scss";
 import keyMappings from "../../data/key-mappings.json";
 import Key from "../Key/Key";
 import GameContext from "../../utils/game-context";
 import useBoardValidation from "../../utils/hooks/use-board-validation";
 import useHandleBack from "../../utils/hooks/use-handle-back";
+import { handleModal } from "../../utils/helpers/misc";
+import ModalContext from "../../utils/modal-context";
 interface KeyBoardProps {
     word: string;
+    setModalIsOpen: React.Dispatch<SetStateAction<boolean>>;
 }
 
-export default function KeyBoard({ word }: KeyBoardProps) {
+export default function KeyBoard({ word, setModalIsOpen }: KeyBoardProps) {
     const { board, attempt, setBoard } = useContext(GameContext);
+    const { setMessage } = useContext(ModalContext);
     const validateBoard = useBoardValidation();
     const handleBack = useHandleBack();
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const submission = board[attempt].map(({ value }) => value).join('');
@@ -22,6 +27,8 @@ export default function KeyBoard({ word }: KeyBoardProps) {
             });
             const newBoard = board.slice();
             setBoard(newBoard);
+            setMessage("You win!");
+            handleModal(setModalIsOpen);
 
         } else {
             const res = await fetch('http://localhost:3000/api/words/validate', {
@@ -33,6 +40,9 @@ export default function KeyBoard({ word }: KeyBoardProps) {
             const { valid } = await res.json();
             if (valid) {
                 validateBoard(word);
+            } else {
+                setMessage("Word is not in the list");
+                handleModal(setModalIsOpen);
             }
         }
     };

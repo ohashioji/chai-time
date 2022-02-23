@@ -17,13 +17,10 @@ export default function handler(
 	if (req.method === "POST") {
 		const { word }: Word = JSON.parse(req.body);
 		console.log(word);
-
 		const match = words.find((w) => w === word);
-
 		const returnMatch = {
 			valid: match ? true : false,
 		};
-		console.log(returnMatch);
 		res.status(200).json(returnMatch);
 	}
 }

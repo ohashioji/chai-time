@@ -34,7 +34,6 @@ const defaultGameContext = {
 
 const GameContext = React.createContext(defaultGameContext);
 
-
 export default GameContext;
 
 

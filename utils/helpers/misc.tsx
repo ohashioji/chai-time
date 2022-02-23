@@ -1,3 +1,4 @@
+import React, { SetStateAction } from "react";
 import { GameBoardType, AnswerAttemptType } from "../game-context";
 
 export function buildBoard() {
@@ -17,4 +18,11 @@ export function buildBoard() {
         }
     });
     return boardArr;
+}
+
+export function handleModal(cb: React.Dispatch<SetStateAction<boolean>>) {
+    cb(true);
+    setTimeout(() => {
+        cb(false);
+    }, 2000);
 }
