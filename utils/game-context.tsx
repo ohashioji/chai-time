@@ -7,6 +7,7 @@ type AnswerAttemptType = {
     id: number;
     value: string;
     correct: boolean;
+    wrongIndex: boolean;
 };
 
 export type GameContextType = {
@@ -26,7 +27,8 @@ export function buildBoard() {
         tempArr.push({
             id: id,
             value: "",
-            correct: false
+            correct: false,
+            wrongIndex: false
         });
 
         if ((id + 1) % 5 === 0) {

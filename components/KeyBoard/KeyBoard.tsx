@@ -10,7 +10,6 @@ interface KeyBoardProps {
 
 export default function KeyBoard({ word }: KeyBoardProps) {
     const { board, target, setTarget, attempt, setAttempt, setBoard } = useContext(GameContext);
-    console.log(word);
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const submission = board[attempt].map(({ value }) => value).join('');
@@ -28,13 +27,25 @@ export default function KeyBoard({ word }: KeyBoardProps) {
                     word: submission
                 })
             });
-            console.log('submitted');
+
             const { valid } = await res.json();
             if (valid) {
-                const correctCharAndIndex = word.split('').map((char, index) => ({ index, char })).filter(({ char, index }) => char === board[attempt][index].value);
-                correctCharAndIndex.forEach(({ index }) => {
-                    board[attempt][index].correct = true;
+                const charArr = word.split("").map((char, index) => ({ index, char }));
+                const correctCharAndIndex = charArr
+                    .filter(({ char, index }) => char === board[attempt][index].value);
+                const otherChars = board[attempt].filter(({ id }) => correctCharAndIndex.every(({ index }) => id !== index));
+                correctCharAndIndex
+                    .forEach(({ index }) => {
+                        board[attempt][index].correct = true;
+                    });
+
+                otherChars.forEach(({ value, ...elem }) => {
+                    if (word.includes(value)) {
+                        elem.wrongIndex = true;
+                    }
+
                 });
+
                 setBoard(board.slice());
                 setAttempt(oldAttempt => oldAttempt + 1);
             }
@@ -49,7 +60,8 @@ export default function KeyBoard({ word }: KeyBoardProps) {
             const resetGuess = {
                 id: newTarget(target),
                 value: "",
-                correct: false
+                correct: false,
+                wrongIndex: false
 
             };
             board[attempt].splice(target - 1, 1, resetGuess);
