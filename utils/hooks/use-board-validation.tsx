@@ -12,8 +12,8 @@ export default function useBoardValidation() {
             .forEach(({ index }) => {
                 board[attempt][index].correct = true;
             });
-        otherChars.forEach(({ value, ...elem }) => {
-            if (word.includes(value)) {
+        otherChars.forEach((elem) => {
+            if (word.includes(elem.value)) {
                 elem.wrongIndex = true;
             }
         });

@@ -2,6 +2,7 @@ import { useState } from "react";
 import GameContext, { GameContextType } from "../utils/game-context";
 import GameBoard from "../components/GameBoard/GameBoard";
 import KeyBoard from "../components/KeyBoard/KeyBoard";
+import Nav from "../components/Nav/Nav";
 import MainWrapper from "../components/MainWrapper/MainWrapper";
 import { buildBoard } from "../utils/helpers/misc";
 export interface IndexPageProps {
@@ -22,20 +23,20 @@ const Home = ({ data }: IndexPageProps) => {
     board,
     setBoard
   };
-
   return (
-    <MainWrapper>
-      <GameContext.Provider value={initialContext}>
-        <GameBoard />
-        <KeyBoard word={data.word} />
-      </GameContext.Provider>
-    </MainWrapper>
+    <>
+      <Nav />
+      <MainWrapper>
+        <GameContext.Provider value={initialContext}>
+          <GameBoard />
+          <KeyBoard word={data.word} />
+        </GameContext.Provider>
+      </MainWrapper>
+    </>
   );
 };
 
 export default Home;
-
-
 
 export async function getServerSideProps() {
   //get a word from server

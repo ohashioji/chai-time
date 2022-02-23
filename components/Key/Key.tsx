@@ -8,6 +8,8 @@ interface KeyProps {
 export default function Key({ value }: KeyProps) {
     const updateBoard = useBoardState();
 
+
+    
     return (
         <div className={styles["key"]} onClick={() => updateBoard(value)}>
             {value}

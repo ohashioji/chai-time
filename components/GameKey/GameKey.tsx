@@ -7,18 +7,8 @@ interface GameKeyProps {
 }
 
 export default function GameKey({ children, correct, wrongIndex }: GameKeyProps) {
-
-    let backgroundColor;
-    if (correct) {
-        backgroundColor = "green";
-    } else if (wrongIndex) {
-        backgroundColor = "yellow";
-    } else {
-        backgroundColor = "white";
-    }
-
     return (
-        <div className={styles["game-key"]} style={{ backgroundColor: backgroundColor }} data-testid="game-key" >
+        <div className={`${styles["game-key"]} ${correct && styles["game-key--jump"]} ${correct ? styles["game-key--correct"] : ""} ${wrongIndex ? styles["game-key--wrong-index"] : ""}`} data-testid="game-key" >
             {children}
         </div >
     );

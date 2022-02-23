@@ -6,12 +6,40 @@
 	justify-content: center;
 	align-items: center;
 	transition-duration: 0.2s;
+	font-size: 1.5rem;
 	cursor: pointer;
+	text-transform: capitalize;
+
 	&:active {
 		transform: scale(0.95);
 	}
 	&--correct {
-		background-color: #00ff00;
-		
+		background-color: #02ac49;
+		color: white;
+	}
+	&--wrong-index {
+		background-color: #ffe600;
+		color: black;
+	}
+	&--jump {
+		animation: jump 0.5s linear;
+	}
+}
+
+@keyframes jump {
+	0% {
+		transform: translateY(0);
+	}
+	25% {
+		transform: translateY(-0.5rem);
+	}
+	50% {
+		transform: translateY(-1rem);
+	}
+	75% {
+		transform: translateY(-0.5rem);
+	}
+	100% {
+		transform: translateY(0);
 	}
 }
