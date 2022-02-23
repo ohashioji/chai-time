@@ -15,32 +15,27 @@ export default function KeyBoard({ word }: KeyBoardProps) {
         e.preventDefault();
         const submission = board[attempt].map(({ value }) => value).join('');
         if (submission === word) {
-            console.log("correct");
+            board[attempt].forEach((elem) => {
+                elem.correct = true;
+            });
+            const newBoard = board.slice();
+            setBoard(newBoard);
+
         } else {
             const res = await fetch('http://localhost:3000/api/words/validate', {
                 method: "POST",
                 body: JSON.stringify({
                     word: submission
                 })
-
             });
             console.log('submitted');
             const { valid } = await res.json();
             if (valid) {
                 const correctCharAndIndex = word.split('').map((char, index) => ({ index, char })).filter(({ char, index }) => char === board[attempt][index].value);
                 correctCharAndIndex.forEach(({ index }) => {
-                    const newFieldStatus = [...board[attempt], {
-                        ...board[attempt][index],
-                        correct: true
-                    }];
-
-
-                    const newBoard = board.slice();
-                    console.log(newBoard);
-                    newBoard.splice(attempt, 1, newFieldStatus);
-                    setBoard(newBoard);
-
+                    board[attempt][index].correct = true;
                 });
+                setBoard(board.slice());
                 setAttempt(oldAttempt => oldAttempt + 1);
             }
         }
@@ -63,7 +58,6 @@ export default function KeyBoard({ word }: KeyBoardProps) {
             setTarget(newTarget);
         }
     }
-
 
     return (
         <form className={styles["key-board"]} data-testid="key-board" onSubmit={handleSubmit}>

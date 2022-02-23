@@ -1166,6 +1166,7 @@ const words = [
 	"braza",
 	"braze",
 	"bream",
+	"bread",
 	"brede",
 	"breds",
 	"breem",
