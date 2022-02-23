@@ -19,6 +19,7 @@ export default function handler(
 		console.log(word);
 
 		const match = words.find((w) => w === word);
+
 		const returnMatch = {
 			valid: match ? true : false,
 		};

@@ -4,18 +4,19 @@ import GameContext, { buildBoard, GameContextType } from "../utils/game-context"
 import GameBoard from "../components/GameBoard/GameBoard";
 import KeyBoard from "../components/KeyBoard/KeyBoard";
 import MainWrapper from "../components/MainWrapper/MainWrapper";
-import dynamic from "next/dynamic";
-
-
-interface IndexPageProps {
-  data: string;
+export interface IndexPageProps {
+  data: {
+    word: string;
+  };
 }
 
 const Home = ({ data }: IndexPageProps) => {
   const [target, setTarget] = useState(0);
   const [board, setBoard] = useState(buildBoard());
+  const [attempt, setAttempt] = useState(0);
   const initialContext: GameContextType = {
-    attempt: 0,
+    attempt,
+    setAttempt,
     target,
     setTarget,
     board,
@@ -26,7 +27,7 @@ const Home = ({ data }: IndexPageProps) => {
     <MainWrapper>
       <GameContext.Provider value={initialContext}>
         <GameBoard />
-        <KeyBoard />
+        <KeyBoard word={data.word} />
       </GameContext.Provider>
     </MainWrapper>
   );

@@ -10,4 +10,8 @@
 	&:active {
 		transform: scale(0.95);
 	}
+	&--correct {
+		background-color: #00ff00;
+		
+	}
 }

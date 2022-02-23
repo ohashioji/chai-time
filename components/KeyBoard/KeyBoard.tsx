@@ -4,25 +4,65 @@ import keyMappings from "../../data/key-mappings.json";
 import Key from "../Key/Key";
 import GameContext from "../../utils/game-context";
 
-export default function KeyBoard() {
-    const { board, attempt } = useContext(GameContext);
+interface KeyBoardProps {
+    word: string;
+}
+
+export default function KeyBoard({ word }: KeyBoardProps) {
+    const { board, target, setTarget, attempt, setAttempt, setBoard } = useContext(GameContext);
+    console.log(word);
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const submission = board[attempt].map(({ value }) => value).join('');
-        console.log(submission);
-        const res = await fetch('http://localhost:3000/api/words/validate', {
-            method: "POST",
-            body: JSON.stringify({
-                word: submission
-            })
+        if (submission === word) {
+            console.log("correct");
+        } else {
+            const res = await fetch('http://localhost:3000/api/words/validate', {
+                method: "POST",
+                body: JSON.stringify({
+                    word: submission
+                })
 
-        });
-        console.log('submitted');
-        const { valid } = await res.json();
-        if (valid) {
-            console.log('valid');
+            });
+            console.log('submitted');
+            const { valid } = await res.json();
+            if (valid) {
+                const correctCharAndIndex = word.split('').map((char, index) => ({ index, char })).filter(({ char, index }) => char === board[attempt][index].value);
+                correctCharAndIndex.forEach(({ index }) => {
+                    const newFieldStatus = [...board[attempt], {
+                        ...board[attempt][index],
+                        correct: true
+                    }];
+
+
+                    const newBoard = board.slice();
+                    console.log(newBoard);
+                    newBoard.splice(attempt, 1, newFieldStatus);
+                    setBoard(newBoard);
+
+                });
+                setAttempt(oldAttempt => oldAttempt + 1);
+            }
         }
+
     };
+
+    function handleBack(e: React.SyntheticEvent<HTMLButtonElement>) {
+        e.preventDefault();
+        if (target > 0) {
+            const newTarget = (oldTarget: number) => oldTarget - 1 >= 0 ? oldTarget - 1 : 0;
+            const resetGuess = {
+                id: newTarget(target),
+                value: "",
+                correct: false
+
+            };
+            board[attempt].splice(target - 1, 1, resetGuess);
+            const newBoard = board.slice();
+            setBoard(newBoard);
+            setTarget(newTarget);
+        }
+    }
 
 
     return (
@@ -31,7 +71,7 @@ export default function KeyBoard() {
                 return <Key key={key} value={key} />;
             })}
             <button type="submit">Submit</button>
-            <button>Back</button>
+            <button type="button" onClick={handleBack}>Back</button>
         </form>
     );
 };
