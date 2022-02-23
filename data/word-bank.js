@@ -9275,6 +9275,7 @@ const words = [
 	"thrid",
 	"thrip",
 	"throe",
+	"throw",
 	"thuds",
 	"thugs",
 	"thuja",

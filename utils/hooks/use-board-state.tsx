@@ -3,7 +3,7 @@ import GameContext from "../game-context";
 
 export function useBoardState() {
     const { target, setTarget, board, setBoard, attempt } = React.useContext(GameContext);
-    console.log(attempt)
+
     const updateBoard = (newVal: string) => {
         const charTarget = board[attempt].find((elem) => elem.id === target);
         if (charTarget) {
