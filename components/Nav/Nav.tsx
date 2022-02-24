@@ -4,7 +4,7 @@ export default function Nav() {
     return (
         <header className={styles["nav"]}>
             <nav>
-                <h1>Word Guess</h1>
+                <h1>Coffee Break</h1>
             </nav>
         </header>
     );

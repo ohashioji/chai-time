@@ -1,11 +1,7 @@
 .main-wrapper {
 	display: flex;
-	position: fixed;
-	bottom: 0;
-	left: 50%;
-	transform: translateX(-50%);
 	flex-direction: column;
-	justify-content: center;
+	justify-content: space-evenly;
 	align-items: center;
 	height: calc(100vh - 73.4px);
 	gap: 1rem;
