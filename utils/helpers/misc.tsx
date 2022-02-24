@@ -9,9 +9,9 @@ export function buildBoard() {
             id: id,
             value: "",
             correct: false,
-            wrongIndex: false
+            wrongIndex: false,
+            notInWord: false
         });
-
         if ((id + 1) % 5 === 0) {
             boardArr.push(tempArr);
             tempArr = [];

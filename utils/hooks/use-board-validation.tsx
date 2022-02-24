@@ -23,6 +23,7 @@ export default function useBoardValidation() {
                 }
             } else {
                 disabledKeys.push(elem.value);
+                elem.notInWord = true
                 setDisabledKeys(disabledKeys.slice());
             }
         });

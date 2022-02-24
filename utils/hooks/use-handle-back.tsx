@@ -14,7 +14,8 @@ export default function useHandleBack() {
                 id: newTarget(target),
                 value: "",
                 correct: false,
-                wrongIndex: false
+                wrongIndex: false,
+                notInWord: false
             };
 
             board[attempt].splice(newTarget(target) % 5, 1, resetGuess);

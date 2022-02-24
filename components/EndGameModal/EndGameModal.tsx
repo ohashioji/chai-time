@@ -4,8 +4,6 @@ import ModalContext from "../../utils/modal-context";
 import GameContext from "../../utils/game-context";
 import useResetGame from "../../utils/hooks/use-reset-game";
 
-
-
 export default function EndGameModal() {
     const { message } = useContext(ModalContext);
     const { attempt, startTime } = useContext(GameContext);

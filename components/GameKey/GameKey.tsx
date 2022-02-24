@@ -4,11 +4,17 @@ interface GameKeyProps {
     children: React.ReactNode;
     correct: boolean;
     wrongIndex: boolean;
+    notInWord: boolean;
 }
 
-const GameKey = React.memo(function GameKey({ children, correct, wrongIndex }: GameKeyProps) {
+const GameKey = React.memo(function GameKey({ children, correct, wrongIndex, notInWord }: GameKeyProps) {
     return (
-        <div className={`${styles["game-key"]} ${correct && styles["game-key--jump"]} ${correct ? styles["game-key--correct"] : ""} ${wrongIndex ? styles["game-key--wrong-index"] : ""}`} data-testid="game-key" >
+        <div className={`${styles["game-key"]} 
+        ${correct && styles["game-key--jump"]} 
+        ${correct ? styles["game-key--correct"] : ""} 
+        ${wrongIndex ? styles["game-key--wrong-index"] : ""}
+        ${notInWord ? styles["game-key--not-in-word"] : ""}`}
+            data-testid="game-key" >
             {children}
         </div >
     );

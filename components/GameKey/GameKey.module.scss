@@ -24,8 +24,13 @@
 		color: white;
 	}
 	&--wrong-index {
-		background-color: #ffe600;
+		background-color: #ffee00;
 		color: black;
+	}
+	&--not-in-word {
+		background-color: rgb(146, 146, 146);
+		color: white;
+		
 	}
 	&--jump {
 		animation: jump 0.5s linear;

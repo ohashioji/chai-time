@@ -14,7 +14,7 @@ interface KeyBoardProps {
 }
 
 export default function KeyBoard({ word, setModalIsOpen, setGameOver }: KeyBoardProps) {
-    const { board, attempt, setBoard, setTotalTime } = useContext(GameContext);
+    const { board, attempt, setBoard } = useContext(GameContext);
     const handleModal = useModal();
     const validate = useBoardValidation();
     const handleBack = useHandleBack();
@@ -33,7 +33,6 @@ export default function KeyBoard({ word, setModalIsOpen, setGameOver }: KeyBoard
             });
             const newBoard = board.slice();
             setBoard(newBoard);
-
             handleModal("You Win!", setGameOver, 5000);
 
         } else {
@@ -47,7 +46,6 @@ export default function KeyBoard({ word, setModalIsOpen, setGameOver }: KeyBoard
             if (valid) {
                 validate(word);
             } else if (attempt === 5) {
-                setTotalTime(Date.now());
                 handleModal("You Lose :(", setGameOver, 5000);
                 resetGame();
             } else {

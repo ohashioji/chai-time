@@ -9,8 +9,12 @@ export default function GameBoard() {
     return (
         <section className={styles["game-board"]} data-testid="game-board">
             {board.map((row) => {
-                return row.map(({ id, value, correct, wrongIndex }) => {
-                    return <GameKey key={id} correct={correct} wrongIndex={wrongIndex}>{value}</GameKey>;
+                return row.map(({ id, value, correct, wrongIndex, notInWord }) => {
+                    return <GameKey
+                        key={id}
+                        correct={correct}
+                        wrongIndex={wrongIndex}
+                        notInWord={notInWord}>{value}</GameKey>;
                 });
             })}
         </section>
