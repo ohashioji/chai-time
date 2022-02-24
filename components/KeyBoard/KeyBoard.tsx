@@ -22,7 +22,7 @@ export default function KeyBoard({ word, setModalIsOpen }: KeyBoardProps) {
         e.preventDefault();
         const submission = board[attempt].map(({ value }) => value).join('');
         if (submission.length < 5) {
-
+            handleModal("Please enter a full word", setModalIsOpen);
             return;
         }
         if (submission === word) {

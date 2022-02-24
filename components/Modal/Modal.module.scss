@@ -5,25 +5,30 @@
 	border: 1px solid black;
 	z-index: 10;
 	position: absolute;
-	top: 100px;
+	top: 50px;
 	display: flex;
-	left: 10px;
+	left: 50%;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+	text-align: center;
 	justify-content: center;
 	animation: show 2s;
 }
 
 @keyframes show {
 	0% {
-		transform: translateX(-100%);
+		transform: translateY(-150px);
 	}
 
 	50% {
-		transform: translateX(50%);
+		transform: translateY(50px);
 	}
 	75% {
-		transform: translateX(50%);
+		transform: translateY(50px);
 	}
 	100% {
-		transform: translateX(-100%);
+		transform: translateY(-150px);
 	}
 }
