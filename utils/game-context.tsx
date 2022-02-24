@@ -8,6 +8,7 @@ export type AnswerAttemptType = {
     value: string;
     correct: boolean;
     wrongIndex: boolean;
+    notInWord: boolean;
 };
 
 export type GameContextType = {

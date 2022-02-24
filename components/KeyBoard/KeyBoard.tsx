@@ -19,7 +19,6 @@ export default function KeyBoard({ word, setModalIsOpen, setGameOver }: KeyBoard
     const validate = useBoardValidation();
     const handleBack = useHandleBack();
 
-    console.log(word);
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const submission = board[attempt].map(({ value }) => value).join('');

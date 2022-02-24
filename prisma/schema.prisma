@@ -25,7 +25,7 @@ model Account {
   session_state      String?
   oauth_token_secret String?
   oauth_token        String?
-  word_guess_games   WordGuessGame[]
+  
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -48,6 +48,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  word_guess_games   WordGuessGame[]
 }
 
 model VerificationToken {
@@ -59,9 +60,11 @@ model VerificationToken {
 }
 
 model WordGuessGame {
-  id                 String  @id @default(cuid())
-  accountId            String
+  id                   String  @id @default(cuid())
+  userId            String
   attempts             Int
   timeTaken            Int
-  account Account @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+
+

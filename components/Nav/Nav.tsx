@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { signIn, useSession } from "next-auth/react";
 import ResetButton from "../ResetButton/ResetButton";
 import styles from './Nav.module.scss';
 import ProfileButton from "../ProfileButton/ProfileButton";
 export default function Nav() {
-    const { data: session, status } = useSession();
+    const { data: session } = useSession();
+  
     return (
         <header className={styles["nav"]}>
             <h1>Chai Time 🍵</h1>

@@ -1,18 +1,31 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import styles from "./EndGameModal.module.scss";
 import ModalContext from "../../utils/modal-context";
 import GameContext from "../../utils/game-context";
 import useResetGame from "../../utils/hooks/use-reset-game";
 import { useSession } from "next-auth/react";
-import { PrismaClient } from '@prisma/client';
+
 export default function EndGameModal() {
-    const prisma = new PrismaClient();
+
     const { data: session } = useSession();
     const { message } = useContext(ModalContext);
     const { attempt, startTime } = useContext(GameContext);
     const resetGame = useResetGame();
     const [progress, setProgress] = useState(0);
     const [totalTime, setTotalTime] = useState<number>();
+
+    const submitResult = useCallback(async function () {
+        const response = await fetch('/api/results', {
+            method: "POST",
+            body: JSON.stringify({
+                email: session!.user!.email,
+                attempts: attempt,
+                timeTaken: Math.round((Date.now() - startTime) / 1000),
+            })
+        });
+        return await response.json();
+    }, [session, attempt, startTime]);
+
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -23,11 +36,13 @@ export default function EndGameModal() {
 
     useEffect(() => {
         setTotalTime(Math.round((Date.now() - startTime) / 1000));
-
+        if (session) {
+            submitResult();
+        }
         setTimeout(() => {
             resetGame();
         }, 5000);
-    }, [resetGame, startTime]);
+    }, [resetGame, startTime, session, submitResult]);
 
     return (
         <div className={styles["modal__backdrop"]}>
