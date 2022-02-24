@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import GameContext from "../utils/game-context";
 import GameBoard from "../components/GameBoard/GameBoard";
 import KeyBoard from "../components/KeyBoard/KeyBoard";
@@ -14,6 +14,7 @@ export interface IndexPageProps {
 }
 
 const Home = ({ data }: IndexPageProps) => {
+  
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
