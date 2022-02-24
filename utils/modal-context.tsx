@@ -5,7 +5,6 @@ export type ModalContextType = {
     message: string;
     setMessage: React.Dispatch<SetStateAction<string>>;
 };
-
 const defaultContext = {
     message: '',
     setMessage: () => { }

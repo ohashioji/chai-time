@@ -6,6 +6,7 @@ import styles from "./Key.module.scss";
 interface KeyProps {
     value: string;
 }
+
 export default function Key({ value }: KeyProps) {
     const { disabledKeys } = useContext(GameContext);
     const [disabled, setDisabled] = useState(false);

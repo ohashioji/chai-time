@@ -5,25 +5,24 @@ import Key from "../Key/Key";
 import GameContext from "../../utils/game-context";
 import useBoardValidation from "../../utils/hooks/use-board-validation";
 import useHandleBack from "../../utils/hooks/use-handle-back";
-import { handleModal } from "../../utils/helpers/misc";
+
 import ModalContext from "../../utils/modal-context";
+import useModal from "../../utils/hooks/use-modal";
 interface KeyBoardProps {
     word: string;
     setModalIsOpen: React.Dispatch<SetStateAction<boolean>>;
 }
 
 export default function KeyBoard({ word, setModalIsOpen }: KeyBoardProps) {
-    const { SERVER_URL } = process.env;
     const { board, attempt, setBoard } = useContext(GameContext);
-    const { setMessage } = useContext(ModalContext);
+    const handleModal = useModal();
     const validateBoard = useBoardValidation();
     const handleBack = useHandleBack();
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const submission = board[attempt].map(({ value }) => value).join('');
         if (submission.length < 5) {
-            setModalIsOpen(true);
-            setMessage('Please fill in all the letters');
+
             return;
         }
         if (submission === word) {
@@ -32,8 +31,7 @@ export default function KeyBoard({ word, setModalIsOpen }: KeyBoardProps) {
             });
             const newBoard = board.slice();
             setBoard(newBoard);
-            setMessage("You win!");
-            handleModal(setModalIsOpen);
+            handleModal("You Win!", setModalIsOpen);
 
         } else {
             const res = await fetch(`/api/words/validate`, {
@@ -46,8 +44,7 @@ export default function KeyBoard({ word, setModalIsOpen }: KeyBoardProps) {
             if (valid) {
                 validateBoard(word);
             } else {
-                setMessage("Word is not in the list");
-                handleModal(setModalIsOpen);
+                handleModal("Word is not in the list :(", setModalIsOpen);
             }
         }
     };
