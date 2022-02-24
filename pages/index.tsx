@@ -36,8 +36,6 @@ const Home = ({ data }: IndexPageProps) => {
     message: modalMessage,
     setMessage: setModalMessage,
   };
-
-
   return (
     <>
       <Nav />

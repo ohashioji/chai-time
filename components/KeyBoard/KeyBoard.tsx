@@ -18,7 +18,6 @@ export default function KeyBoard({ word, setModalIsOpen }: KeyBoardProps) {
     const { setMessage } = useContext(ModalContext);
     const validateBoard = useBoardValidation();
     const handleBack = useHandleBack();
-    console.log(word);
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const submission = board[attempt].map(({ value }) => value).join('');
