@@ -1,3 +1,4 @@
+@use "../../styles/partials/breakpoints.scss" as *;
 .main-wrapper {
 	display: flex;
 	position: relative;
@@ -6,4 +7,9 @@
 	align-items: center;
 	height: calc(100vh - 73.4px);
 	gap: 1rem;
+	padding: 1rem;
+	@include mobile {
+		gap: 0.5rem;
+		padding: 0.5rem;
+	}
 }

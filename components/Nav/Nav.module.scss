@@ -1,5 +1,11 @@
+@use "../../styles/partials/breakpoints.scss" as *;
+
 .nav {
 	display: flex;
 	justify-content: center;
 	border-bottom: 1px solid black;
+	padding: 1rem;
+	@include mobile {
+		padding: 0.5rem;
+	}
 }

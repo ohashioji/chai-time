@@ -37,7 +37,7 @@ const Home = ({ data }: IndexPageProps) => {
         )}
         <MainWrapper>
           <GameContext.Provider value={initGame}>
-            <ResetButton />
+            {/* <ResetButton /> */}
             <GameBoard />
             <KeyBoard word={data.word} setModalIsOpen={setModalIsOpen} />
           </GameContext.Provider>
