@@ -18,7 +18,7 @@ export default function KeyBoard({ word, setModalIsOpen, setGameOver }: KeyBoard
     const handleModal = useModal();
     const validate = useBoardValidation();
     const handleBack = useHandleBack();
-    const resetGame = useResetGame();
+
     console.log(word);
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -47,7 +47,6 @@ export default function KeyBoard({ word, setModalIsOpen, setGameOver }: KeyBoard
                 validate(word);
             } else if (attempt === 5) {
                 handleModal("You Lose :(", setGameOver, 5000);
-                resetGame();
             } else {
                 handleModal("Word is not in the list", setModalIsOpen);
             }

@@ -2,12 +2,34 @@
 
 .nav {
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
 	border-bottom: 1px solid black;
-	padding: 1rem;
+	padding: 0.5rem 5%;
 	@include mobile {
 		padding: 0.5rem;
-        justify-content: space-between;
-        font-size: 0.8rem;
+		justify-content: space-between;
+		font-size: 0.8rem;
+	}
+	&__options {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 2rem;
+		@include mobile {
+			gap: 1rem;
+		}
+	}
+	&__sign-in {
+		background-color: green;
+		font-size: 1.5rem;
+		font-weight: 600;
+		padding: 0.5rem 1rem;
+		border-radius: 0.5rem;
+		color: white;
+        cursor: pointer;
+		@include mobile {
+			padding: 0.4rem 0.5rem;
+			font-size: 1rem;
+		}
 	}
 }

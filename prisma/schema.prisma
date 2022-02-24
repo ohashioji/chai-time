@@ -25,6 +25,7 @@ model Account {
   session_state      String?
   oauth_token_secret String?
   oauth_token        String?
+  word_guess_games   WordGuessGame[]
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -55,4 +56,12 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model WordGuessGame {
+  id                 String  @id @default(cuid())
+  accountId            String
+  attempts             Int
+  timeTaken            Int
+  account Account @relation(fields: [accountId], references: [id], onDelete: Cascade)
 }

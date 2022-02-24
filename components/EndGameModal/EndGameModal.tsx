@@ -3,8 +3,11 @@ import styles from "./EndGameModal.module.scss";
 import ModalContext from "../../utils/modal-context";
 import GameContext from "../../utils/game-context";
 import useResetGame from "../../utils/hooks/use-reset-game";
-
+import { useSession } from "next-auth/react";
+import { PrismaClient } from '@prisma/client';
 export default function EndGameModal() {
+    const prisma = new PrismaClient();
+    const { data: session } = useSession();
     const { message } = useContext(ModalContext);
     const { attempt, startTime } = useContext(GameContext);
     const resetGame = useResetGame();
@@ -20,6 +23,7 @@ export default function EndGameModal() {
 
     useEffect(() => {
         setTotalTime(Math.round((Date.now() - startTime) / 1000));
+
         setTimeout(() => {
             resetGame();
         }, 5000);
