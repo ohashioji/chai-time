@@ -5,11 +5,14 @@ import GameContext from "../../utils/game-context";
 import useResetGame from "../../utils/hooks/use-reset-game";
 
 
+
 export default function EndGameModal() {
     const { message } = useContext(ModalContext);
-    const { attempt } = useContext(GameContext);
+    const { attempt, startTime } = useContext(GameContext);
     const resetGame = useResetGame();
     const [progress, setProgress] = useState(0);
+    const [totalTime, setTotalTime] = useState<number>();
+
     useEffect(() => {
         const interval = setInterval(() => {
             setProgress(progress => progress + 0.5);
@@ -18,10 +21,11 @@ export default function EndGameModal() {
     }, [progress]);
 
     useEffect(() => {
+        setTotalTime(Math.round((Date.now() - startTime) / 1000));
         setTimeout(() => {
             resetGame();
         }, 5000);
-    }, [resetGame]);
+    }, [resetGame, startTime]);
 
     return (
         <div className={styles["modal__backdrop"]}>
@@ -29,6 +33,7 @@ export default function EndGameModal() {
                 <h1>{message}</h1>
                 <div className={styles["modal__stats"]}>
                     <p>Attempts: {attempt + 1}</p>
+                    <p>Time Elapsed: {totalTime || ""} seconds...</p>
                     <p>Restarting Game...</p>
                 </div>
                 <div className={styles["modal__progress"]} style={{ width: `${progress}%` }} />

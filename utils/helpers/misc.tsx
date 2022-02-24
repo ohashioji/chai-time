@@ -28,6 +28,3 @@ export function handleModal(cb: React.Dispatch<SetStateAction<boolean>>, time: n
 }
 
 
-export function formatTime(ts: number) {
-    return new Date(ts * 1e3).toISOString().slice(-13, -5);
-}

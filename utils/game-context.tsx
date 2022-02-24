@@ -25,7 +25,7 @@ export type GameContextType = {
 
 const defaultGameContext = {
     startTime: Date.now(),
-    setStartTime: () => {},
+    setStartTime: () => { },
     attempt: 0,
     setAttempt: () => { },
     target: 0,
