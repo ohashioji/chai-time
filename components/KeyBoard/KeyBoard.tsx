@@ -36,7 +36,7 @@ export default function KeyBoard({ word, setModalIsOpen }: KeyBoardProps) {
             handleModal(setModalIsOpen);
 
         } else {
-            const res = await fetch(`${SERVER_URL}/api/words/validate`, {
+            const res = await fetch(`/api/words/validate`, {
                 method: "POST",
                 body: JSON.stringify({
                     word: submission
