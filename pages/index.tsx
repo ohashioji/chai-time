@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GameContext, { GameContextType } from "../utils/game-context";
 import GameBoard from "../components/GameBoard/GameBoard";
 import KeyBoard from "../components/KeyBoard/KeyBoard";
@@ -8,6 +8,8 @@ import { buildBoard } from "../utils/helpers/misc";
 import Portal from "../components/Portal/Portal";
 import Modal from "../components/Modal/Modal";
 import ModalContext, { ModalContextType } from "../utils/modal-context";
+import ResetButton from "../components/ResetButton/ResetButton";
+import useInitGame from "../utils/hooks/use-init-game";
 export interface IndexPageProps {
   data: {
     word: string;
@@ -15,27 +17,14 @@ export interface IndexPageProps {
 }
 
 const Home = ({ data }: IndexPageProps) => {
-
-  const [target, setTarget] = useState(0);
-  const [board, setBoard] = useState(buildBoard());
-  const [attempt, setAttempt] = useState(0);
-  const [disabledKeys, setDisabledKeys] = useState<string[]>([]);
-  const initialContext: GameContextType = {
-    attempt,
-    setAttempt,
-    target,
-    setTarget,
-    board,
-    setBoard,
-    disabledKeys,
-    setDisabledKeys
-  };
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
+  const initGame = useInitGame();
   const initialModal: ModalContextType = {
     message: modalMessage,
     setMessage: setModalMessage,
   };
+
   return (
     <>
       <Nav />
@@ -47,7 +36,8 @@ const Home = ({ data }: IndexPageProps) => {
           </Portal>
         )}
         <MainWrapper>
-          <GameContext.Provider value={initialContext}>
+          <GameContext.Provider value={initGame}>
+            <ResetButton />
             <GameBoard />
             <KeyBoard word={data.word} setModalIsOpen={setModalIsOpen} />
           </GameContext.Provider>

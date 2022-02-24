@@ -3,8 +3,7 @@ import GameContext from "../game-context";
 
 export function useBoardState() {
     const { target, setTarget, board, setBoard, attempt } = React.useContext(GameContext);
-
-    const updateBoard = (newVal: string) => {
+    return function (newVal: string) {
         const charTarget = board[attempt].find((elem) => elem.id === target);
         if (charTarget) {
             const newChar = {
@@ -18,6 +17,5 @@ export function useBoardState() {
             setTarget(oldTarget => oldTarget + 1);
         }
     };
-    return updateBoard;
 
 }

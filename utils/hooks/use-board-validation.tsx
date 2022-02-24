@@ -21,7 +21,6 @@ export default function useBoardValidation() {
                 if (!elem.correct) {
                     elem.wrongIndex = true;
                 }
-
             } else {
                 disabledKeys.push(elem.value);
                 setDisabledKeys(disabledKeys.slice());
