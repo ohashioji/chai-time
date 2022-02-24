@@ -14,7 +14,6 @@ export default function Portal({ children, selector }: PortalProps) {
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-
         ref.current = document.querySelector(selector);
         setMounted(true);
     }, [selector]);

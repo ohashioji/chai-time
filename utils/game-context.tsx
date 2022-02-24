@@ -11,6 +11,8 @@ export type AnswerAttemptType = {
 };
 
 export type GameContextType = {
+    startTime: number;
+    setStartTime: React.Dispatch<React.SetStateAction<number>>;
     attempt: number;
     setAttempt: React.Dispatch<React.SetStateAction<number>>;
     target: number;
@@ -22,6 +24,8 @@ export type GameContextType = {
 };
 
 const defaultGameContext = {
+    startTime: Date.now(),
+    setStartTime: () => {},
     attempt: 0,
     setAttempt: () => { },
     target: 0,

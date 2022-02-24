@@ -1,13 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext } from 'react';
 import GameContext from "../game-context";
 import { buildBoard } from "../helpers/misc";
-
+import { useRouter } from "next/router";
 export default function useResetGame() {
-    const { setAttempt, setTarget, setBoard, setDisabledKeys } = useContext(GameContext);
-    return function () {
+    const router = useRouter();
+    const { setAttempt, setTarget, setBoard, setDisabledKeys, setStartTime } = useContext(GameContext);
+    return useCallback(function () {
+        router.replace(router.asPath);
+        setStartTime(Date.now());
         setAttempt(0);
         setTarget(0);
         setBoard(buildBoard());
         setDisabledKeys([]);
-    };
+    }, [router, setAttempt, setTarget, setBoard, setDisabledKeys, setStartTime]);
 }

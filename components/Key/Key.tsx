@@ -12,13 +12,13 @@ export default function Key({ value }: KeyProps) {
     const [disabled, setDisabled] = useState(false);
     const updateBoard = useBoardState();
 
-
     useEffect(() => {
-        if (!disabled) {
-            if (disabledKeys.includes(value)) {
-                setDisabled(true);
-            }
+        if (disabledKeys.includes(value)) {
+            setDisabled(true);
+        } else {
+            setDisabled(false);
         }
+
     }, [disabledKeys, disabled, value]);
 
 

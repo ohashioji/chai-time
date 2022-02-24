@@ -6,10 +6,12 @@ import Nav from "../components/Nav/Nav";
 import MainWrapper from "../components/MainWrapper/MainWrapper";
 import { buildBoard } from "../utils/helpers/misc";
 import Portal from "../components/Portal/Portal";
-import Modal from "../components/Modal/Modal";
+import Modal from "../components/MessageModal/MessageModal";
 import ModalContext, { ModalContextType } from "../utils/modal-context";
 import ResetButton from "../components/ResetButton/ResetButton";
 import useInitGame from "../utils/hooks/use-init-game";
+import EndGameModal from "../components/EndGameModal/EndGameModal";
+import useResetGame from "../utils/hooks/use-reset-game";
 export interface IndexPageProps {
   data: {
     word: string;
@@ -18,32 +20,37 @@ export interface IndexPageProps {
 
 const Home = ({ data }: IndexPageProps) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
+
   const initGame = useInitGame();
   const initialModal: ModalContextType = {
     message: modalMessage,
     setMessage: setModalMessage,
   };
 
+
   return (
     <>
-      <Nav />
-      <ModalContext.Provider value={initialModal}>
-        <div id="modal" className="portal" />
-        {modalIsOpen && (
-          <Portal selector="#modal">
-            <Modal />
-          </Portal>
-        )}
-        <MainWrapper>
-          <GameContext.Provider value={initGame}>
-            {/* <ResetButton /> */}
+      <GameContext.Provider value={initGame}>
+        <ModalContext.Provider value={initialModal}>
+          <Nav />
+          <MainWrapper>
             <GameBoard />
-            <KeyBoard word={data.word} setModalIsOpen={setModalIsOpen} />
-          </GameContext.Provider>
-        </MainWrapper>
-      </ModalContext.Provider>
-
+            <KeyBoard word={data.word} setModalIsOpen={setModalIsOpen} setGameOver={setGameOver} />
+          </MainWrapper>
+          <div id="modal" className="portal" />
+          {modalIsOpen && (
+            <Portal selector="#modal">
+              <Modal />
+            </Portal>
+          )}{gameOver && (
+            <Portal selector="#modal">
+              <EndGameModal />
+            </Portal>
+          )}
+        </ModalContext.Provider>
+      </GameContext.Provider>
     </>
   );
 };

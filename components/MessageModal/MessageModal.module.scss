@@ -1,8 +1,10 @@
-.modal {
-	width: 50vh;
+@use "../../styles/partials/breakpoints.scss" as *;
+.message-modal {
+	width: 50vw;
+	max-width: 30rem;
 	background-color: white;
 	border-radius: 0.5rem;
-	border: 1px solid black;
+	border: 4px solid black;
 	z-index: 10;
 	position: absolute;
 	top: 50px;
@@ -12,9 +14,15 @@
 	margin-right: auto;
 	left: 0;
 	right: 0;
-	text-align: center;
 	justify-content: center;
 	animation: show 2s;
+	padding: 1rem;
+
+	@include mobile {
+		font-size: 0.75rem;
+		padding: 0.5rem;
+		width: 90vw;
+	}
 }
 
 @keyframes show {

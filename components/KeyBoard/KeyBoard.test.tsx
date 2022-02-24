@@ -3,6 +3,6 @@ import KeyBoard from "./KeyBoard";
 
 
 it("Renders Keyboard into dom", () => {
-    render(<KeyBoard word="potat" />);
+    render(<KeyBoard word="potat"  />);
     expect(screen.getByTestId("key-board")).toBeTruthy();
 });

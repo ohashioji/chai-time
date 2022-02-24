@@ -5,19 +5,21 @@ import Key from "../Key/Key";
 import GameContext from "../../utils/game-context";
 import useBoardValidation from "../../utils/hooks/use-board-validation";
 import useHandleBack from "../../utils/hooks/use-handle-back";
-
-import ModalContext from "../../utils/modal-context";
 import useModal from "../../utils/hooks/use-modal";
+import useResetGame from "../../utils/hooks/use-reset-game";
 interface KeyBoardProps {
     word: string;
     setModalIsOpen: React.Dispatch<SetStateAction<boolean>>;
+    setGameOver: React.Dispatch<SetStateAction<boolean>>;
 }
 
-export default function KeyBoard({ word, setModalIsOpen }: KeyBoardProps) {
+export default function KeyBoard({ word, setModalIsOpen, setGameOver }: KeyBoardProps) {
     const { board, attempt, setBoard } = useContext(GameContext);
     const handleModal = useModal();
-    const validateBoard = useBoardValidation();
+    const validate = useBoardValidation();
     const handleBack = useHandleBack();
+    const resetGame = useResetGame();
+    console.log(word);
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const submission = board[attempt].map(({ value }) => value).join('');
@@ -31,8 +33,8 @@ export default function KeyBoard({ word, setModalIsOpen }: KeyBoardProps) {
             });
             const newBoard = board.slice();
             setBoard(newBoard);
-            handleModal("You Win!", setModalIsOpen);
-
+            handleModal("You Win!", setGameOver, 5000);
+            resetGame();
         } else {
             const res = await fetch(`/api/words/validate`, {
                 method: "POST",
@@ -42,14 +44,15 @@ export default function KeyBoard({ word, setModalIsOpen }: KeyBoardProps) {
             });
             const { valid } = await res.json();
             if (valid) {
-                validateBoard(word);
+                validate(word);
+            } else if (attempt === 5) {
+                handleModal("You Lose :(", setGameOver, 5000);
+                resetGame();
             } else {
-                handleModal("Word is not in the list :(", setModalIsOpen);
+                handleModal("Word is not in the list", setModalIsOpen);
             }
-        }
+        };
     };
-
-
 
     return (
         <form className={styles["key-board"]} data-testid="key-board" onSubmit={handleSubmit}>

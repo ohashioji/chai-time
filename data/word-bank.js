@@ -2308,5 +2308,6 @@ const words = [
 	"artsy",
 	"rural",
 	"shave",
+	"twerk"
 ];
 export default words;

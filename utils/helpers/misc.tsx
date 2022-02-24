@@ -20,9 +20,14 @@ export function buildBoard() {
     return boardArr;
 }
 
-export function handleModal(cb: React.Dispatch<SetStateAction<boolean>>) {
+export function handleModal(cb: React.Dispatch<SetStateAction<boolean>>, time: number) {
     cb(true);
     setTimeout(() => {
         cb(false);
-    }, 2000);
+    }, time);
+}
+
+
+export function formatTime(ts: number) {
+    return new Date(ts * 1e3).toISOString().slice(-13, -5);
 }
