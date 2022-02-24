@@ -34,7 +34,7 @@ export default function KeyBoard({ word, setModalIsOpen, setGameOver }: KeyBoard
             const newBoard = board.slice();
             setBoard(newBoard);
             handleModal("You Win!", setGameOver, 5000);
-            resetGame();
+
         } else {
             const res = await fetch(`/api/words/validate`, {
                 method: "POST",
