@@ -56,8 +56,8 @@ export default function KeyBoard({ word, setModalIsOpen }: KeyBoardProps) {
             {keyMappings.map(({ key }) => {
                 return <Key key={key} value={key} />;
             })}
-            <button className={styles["key-board__submit"]} type="submit">Submit</button>
             <button className={styles["key-board__back"]} type="button" onClick={handleBack}>Back</button>
+            <button className={styles["key-board__submit"]} type="submit">Submit</button>
         </form>
     );
 };
