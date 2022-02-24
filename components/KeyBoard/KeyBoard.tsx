@@ -13,14 +13,20 @@ interface KeyBoardProps {
 }
 
 export default function KeyBoard({ word, setModalIsOpen }: KeyBoardProps) {
+    const { SERVER_URL } = process.env;
     const { board, attempt, setBoard } = useContext(GameContext);
     const { setMessage } = useContext(ModalContext);
     const validateBoard = useBoardValidation();
     const handleBack = useHandleBack();
-
+    console.log(word);
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const submission = board[attempt].map(({ value }) => value).join('');
+        if (submission.length < 5) {
+            setModalIsOpen(true);
+            setMessage('Please fill in all the letters');
+            return;
+        }
         if (submission === word) {
             board[attempt].forEach((elem) => {
                 elem.correct = true;
@@ -31,7 +37,7 @@ export default function KeyBoard({ word, setModalIsOpen }: KeyBoardProps) {
             handleModal(setModalIsOpen);
 
         } else {
-            const res = await fetch('http://localhost:3000/api/words/validate', {
+            const res = await fetch(`${SERVER_URL}/api/words/validate`, {
                 method: "POST",
                 body: JSON.stringify({
                     word: submission

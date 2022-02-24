@@ -9,10 +9,13 @@
 		background-color: rgb(0, 119, 255);
 		color: white;
 		border-radius: 0.5rem;
-		padding: 1rem 1.5rem;
+		padding: 0.5rem 1rem;
 		transition-duration: 0.2s;
 		font-size: 1.5rem;
 		font-weight: 600;
+		&:active {
+			transform: scale(0.9);
+		}
 		&:hover {
 			opacity: 0.9;
 		}
@@ -22,8 +25,11 @@
 		background-color: rgb(255, 196, 0);
 		color: black;
 		border-radius: 0.5rem;
-		padding: 1rem 1.5rem;
+		padding: 0.5rem 1rem;
 		font-size: 1.5rem;
 		font-weight: 600;
+		&:active {
+			transform: scale(0.9);
+		}
 	}
 }

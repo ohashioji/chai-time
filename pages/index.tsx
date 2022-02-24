@@ -15,6 +15,7 @@ export interface IndexPageProps {
 }
 
 const Home = ({ data }: IndexPageProps) => {
+
   const [target, setTarget] = useState(0);
   const [board, setBoard] = useState(buildBoard());
   const [attempt, setAttempt] = useState(0);
@@ -62,12 +63,13 @@ const Home = ({ data }: IndexPageProps) => {
 export default Home;
 
 export async function getServerSideProps() {
+  const { SERVER_URL } = process.env;
   //get a word from server
-  const res = await fetch("http://localhost:3000/api/words");
+  const res = await fetch(`${SERVER_URL}/api/words`);
   const data = await res.json();
   return {
     props: {
       data
-    }, // will be passed to the page component as props
+    },
   };
 };
