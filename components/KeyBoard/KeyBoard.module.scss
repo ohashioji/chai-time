@@ -14,6 +14,7 @@
 		transition-duration: 0.2s;
 		font-size: 1.5rem;
 		font-weight: 600;
+		border: 2px solid black;
 		&:active {
 			transform: scale(0.9);
 		}
@@ -23,6 +24,7 @@
 	}
 	&__back {
 		cursor: pointer;
+		border: 2px solid black;
 		background-color: rgb(255, 196, 0);
 		color: black;
 		border-radius: 0.5rem;

@@ -15,7 +15,6 @@
 		width: 3rem;
 		height: 3rem;
 	}
-
 	&:active {
 		transform: scale(0.95);
 	}
@@ -28,9 +27,8 @@
 		color: black;
 	}
 	&--not-in-word {
-		background-color: rgb(146, 146, 146);
+		background-color: rgb(180, 180, 180);
 		color: white;
-		
 	}
 	&--jump {
 		animation: jump 0.5s linear;
