@@ -9,8 +9,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 			const user = await prisma.user.findFirst({
 				where: { email },
 			});
-			console.log(user);
-
 			if (user) {
 				const data = {
 					userId: user.id,

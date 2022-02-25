@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import styles from "./EndGameModal.module.scss";
 import ModalContext from "../../utils/modal-context";
 import GameContext from "../../utils/game-context";
@@ -9,7 +9,7 @@ export default function EndGameModal() {
 
     const { data: session } = useSession();
     const { message } = useContext(ModalContext);
-    const { attempt, startTime } = useContext(GameContext);
+    const { attempt, startTime, winningWord } = useContext(GameContext);
     const resetGame = useResetGame();
     const [progress, setProgress] = useState(0);
     const [totalTime, setTotalTime] = useState<number>();
@@ -48,10 +48,10 @@ export default function EndGameModal() {
         <div className={styles["modal__backdrop"]}>
             <div className={styles["modal"]}>
                 <h1>{message}</h1>
+                <p className={styles["modal__word"]}>{winningWord}</p>
                 <div className={styles["modal__stats"]}>
                     <p>Attempts: {attempt + 1}</p>
                     <p>Time Elapsed: {totalTime || ""} seconds...</p>
-                    <p>Restarting Game...</p>
                 </div>
                 <div className={styles["modal__progress"]} style={{ width: `${progress}%` }} />
             </div>

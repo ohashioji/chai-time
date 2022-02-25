@@ -14,18 +14,19 @@ export interface IndexPageProps {
 }
 
 const Home = ({ data }: IndexPageProps) => {
-  
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const Portal = dynamic(() => import("../components/Portal/Portal"));
   const Modal = dynamic(() => import("../components/MessageModal/MessageModal"));
   const EndGameModal = dynamic(() => import("../components/EndGameModal/EndGameModal"));
-  const initGame = useInitGame();
+  const initGame = useInitGame(data.word);
   const initialModal: ModalContextType = {
     message: modalMessage,
     setMessage: setModalMessage,
   };
+  console.log(data.word)
   return (
     <>
       <GameContext.Provider value={initGame}>
