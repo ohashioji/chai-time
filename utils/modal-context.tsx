@@ -1,6 +1,5 @@
 import React, { createContext, SetStateAction } from 'react';
 
-
 export type ModalContextType = {
     message: string;
     setMessage: React.Dispatch<SetStateAction<string>>;
