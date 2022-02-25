@@ -12,7 +12,6 @@ const options = {
 			clientId: process.env.GITHUB_ID,
 			clientSecret: process.env.GITHUB_SECRET,
 		}),
-		// ...add more providers here
 	],
 	database: process.env.DATABASE_URL,
 };
