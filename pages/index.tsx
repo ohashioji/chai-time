@@ -26,7 +26,7 @@ const Home = ({ data }: IndexPageProps) => {
     message: modalMessage,
     setMessage: setModalMessage,
   };
-  console.log(data.word)
+  
   return (
     <>
       <GameContext.Provider value={initGame}>
